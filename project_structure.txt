@@ -1,0 +1,18 @@
+OmniParser/
+├── api/
+│   ├── __init__.py
+│   ├── routes.py
+│   └── server.py
+├── core/
+│   ├── __init__.py
+│   ├── parser.py      # Main OmniParser logic
+│   └── utils.py       # Helper functions
+├── config/
+│   └── model_config.yaml
+├── client/
+│   ├── index.html
+│   ├── client.js
+│   └── styles.css
+├── models/
+│   └── __init__.py
+└── main.py
