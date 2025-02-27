@@ -185,6 +185,13 @@ rm -rf node_modules
 npm install
 ```
 
+## Example API Call
+```javascript
+// Example API call
+const imageFile = new File([/* your image data */], "screenshot.png");
+const results = await parseScreen(imageFile);
+```
+
 ## License
 
 MIT
