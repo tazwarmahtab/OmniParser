@@ -37,17 +37,50 @@ Ensure you have the V2 weights downloaded in weights folder (ensure caption weig
    mv weights/icon_caption weights/icon_caption_florence
 ```
 
-<!-- ## [deprecated]
-Then download the model ckpts files in: https://huggingface.co/microsoft/OmniParser, and put them under weights/, default folder structure is: weights/icon_detect, weights/icon_caption_florence, weights/icon_caption_blip2. 
+## Complete Setup Guide for V2
 
-For v1: 
-convert the safetensor to .pt file. 
+1. Create and activate conda environment:
+```bash
+conda create -n "omni" python==3.12
+conda activate omni
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Download model weights:
+```bash
+# Create weights directory
+mkdir -p weights/icon_detect weights/icon_caption_florence
+
+# Download V2 model weights
+for f in icon_detect/{train_args.yaml,model.pt,model.yaml} icon_caption/{config.json,generation_config.json,model.safetensors}; do 
+    huggingface-cli download microsoft/OmniParser-v2.0 "$f" --local-dir weights
+done
+
+# Rename caption folder
+mv weights/icon_caption weights/icon_caption_florence
+```
+
+4. Verify installation:
+```bash
+python demo.py
+```
+
+5. For custom usage, modify the config file at `config/model_config.yaml`
+
+## Troubleshooting V2 Setup
+
+If you encounter CUDA/GPU issues:
+- Ensure you have CUDA toolkit installed
+- Check torch version matches your CUDA version
+- Try running with CPU only by setting:
 ```python
-python weights/convert_safetensor_to_pt.py
-
-For v1.5: 
-download 'model_v1_5.pt' from https://huggingface.co/microsoft/OmniParser/tree/main/icon_detect_v1_5, make a new dir: weights/icon_detect_v1_5, and put it inside the folder. No weight conversion is needed. 
-``` -->
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+```
 
 ## Examples:
 We put together a few simple examples in the demo.ipynb. 
@@ -75,3 +108,83 @@ If you find our work useful, please consider citing our work:
       url={https://arxiv.org/abs/2408.00203}, 
 }
 ```
+
+# OmniParser
+
+A versatile parsing tool for various data formats.
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+- Git
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/OmniParser.git
+cd OmniParser
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory:
+```bash
+touch .env
+```
+
+4. Add the following environment variables to your `.env` file:
+```
+PORT=3000
+NODE_ENV=development
+```
+
+## Running the Application
+
+### Development Mode
+```bash
+npm run dev
+```
+
+### Production Mode
+```bash
+npm run build
+npm start
+```
+
+## Running Tests
+```bash
+npm test
+```
+
+## Additional Setup
+
+1. Make sure all required services are running
+2. Configure your database settings in the config file
+3. Run migrations if necessary:
+```bash
+npm run migrate
+```
+
+## Troubleshooting
+
+If you encounter any issues during installation:
+
+1. Clear npm cache:
+```bash
+npm cache clean --force
+```
+
+2. Delete node_modules and reinstall:
+```bash
+rm -rf node_modules
+npm install
+```
+
+## License
+
+MIT

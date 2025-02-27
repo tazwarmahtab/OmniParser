@@ -1,0 +1,13 @@
+model_paths:
+  icon_detect: "weights/icon_detect"
+  icon_caption: "weights/icon_caption_florence"
+
+detection:
+  confidence_threshold: 0.5
+  nms_threshold: 0.45
+  max_detections: 100
+
+caption:
+  max_length: 77
+  num_beams: 4
+  temperature: 0.7
